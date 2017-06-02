@@ -5,11 +5,11 @@ var router = express.Router();
 
 router.route('/')
     .get(function(req, res) {
+        console.log('fnc reached');
         Task.find(function(err, tasks) {
             if (err) return res.status(500).send(err);
             return res.send(tasks);
-        }).populate('user');
-
+        });
     })
     .post(function(req, res) {
         Task.create(req.body, function(err, task) {
@@ -52,6 +52,7 @@ router.route('/')
 
 router.route('/:id')
     .get(function(req, res) {
+      console.log('get id')
         Task.findById(req.params.id, function(err, task) {
             if (err) return res.status(500).send(err);
             return res.send(task);

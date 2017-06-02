@@ -1,11 +1,9 @@
-<div class="container">
+<div class="container" ng-repeat="task in tasks">
   <h1>{{task.title}}</h1>
   <div class="well">
       <h3>
+
           {{task.description}}
-      </h3>
-      <h3>
-          Due: {{task.dueDate | date}}
       </h3>
       <img class="img-responsive" ng-src="{{task.image}}">
   </div>

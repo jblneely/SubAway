@@ -20,10 +20,11 @@ angular.module('TaskCtrls', ['TaskServices'])
     }])
     .controller('ShowCtrl', ['$scope', '$stateParams', 'Task', function($scope, $stateParams, Task) {
         console.log('show controller');
-        $scope.task = {};
+        $scope.tasks = {};
 
         Task.get({ id: $stateParams.id }, function success(data) {
-            $scope.task = data;
+          console.log('data from Task.get', data);
+            $scope.tasks = data;
         }, function error(data) {
             console.log(data);
         });
@@ -170,89 +171,95 @@ angular.module('TaskCtrls', ['TaskServices'])
 }])
 
 .controller("LineCtrl", ['$scope', 'Auth', 'Task', '$http', '$stateParams', function($scope, Auth, Task, $http, $stateParams) {
-    $http.get('/api/tasks/usertasks/' + $stateParams.id).then(function success(res) {
-        console.log('okay', res.data.user);
-        //Stuff goes here
-        //for loop to create taskDataFromDB object
-        // var taskDataFromDB = [{ tasks: 5, date: '05/22/17' },
-        //     { tasks: 8, date: '05/23/17' },
-        //     { tasks: 11, date: '05/24/17' },
-        //     { tasks: 7.75, date: '05/25/17' },
-        //     { tasks: 5, date: '05/26/17' },
-        //     { tasks: 6, date: '05/27/17' },
-        //     { tasks: 8.5, date: '05/28/17' }
-        // ];
-        console.log('in the line controller');
-        var taskObj = {};
-        var baselineArray = [];
-        var dateArray = [];
-        var numberArray = [];
-        res.data.user.completedTask.forEach(function(dataPoint) {
-            var strDate = formatDate(new Date(dataPoint.completedDate)).toString();
-            if(taskObj[strDate]){
-              taskObj[strDate] += 1;
-            }
-            else{
-              taskObj[strDate] = 1;
-              baselineArray.push(10);
-            }
-        });
-        console.log(taskObj);
 
-        for(var key in taskObj) {
-            dateArray.push(formatDate(new Date(Date.parse(key))));
-            numberArray.push(taskObj[key]);
-        }
 
-        var tasks = [{
-            label: 'Baseline',
-            data: baselineArray,
-            backgroundColor: [
-                'rgba(255,255,255, 0.4)'
-            ]
-        },{
-            label: 'Tasks Completed',
-            data: numberArray,
-            backgroundColor: [
-                'rgba(0, 255, 255, 1)'
-            ]
-        }];
 
-        var ctx = document.getElementById("line").getContext('2d');
 
-        var line = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: dateArray,
-                datasets: tasks
-            }
-        });
 
-        //Doughnut Chart
 
-        var ctx2 = document.getElementById("myChart").getContext('2d');
-        var myChart = new Chart(ctx2, {
-            type: 'doughnut',
-            data: {
-                labels: ["Current", "Goal"],
-                datasets: [{
-                    backgroundColor: ['rgba(0, 255, 255, 1)',
-                        'rgba(255,255, 255, 0.4)'
-                    ],
-                    data: [numberArray[numberArray.length - 1], 10 - numberArray[numberArray.length - 1]]
-                }]
-            }
-        });
-    }, function err(res) {
-        console.log('error', res);
-    });
+//     $http.get('/api/tasks/usertasks/' + $stateParams.id).then(function success(res) {
+//         console.log('okay', res.data.user);
+//         //Stuff goes here
+//         //for loop to create taskDataFromDB object
+//         // var taskDataFromDB = [{ tasks: 5, date: '05/22/17' },
+//         //     { tasks: 8, date: '05/23/17' },
+//         //     { tasks: 11, date: '05/24/17' },
+//         //     { tasks: 7.75, date: '05/25/17' },
+//         //     { tasks: 5, date: '05/26/17' },
+//         //     { tasks: 6, date: '05/27/17' },
+//         //     { tasks: 8.5, date: '05/28/17' }
+//         // ];
+//         console.log('in the line controller');
+//         var taskObj = {};
+//         var baselineArray = [];
+//         var dateArray = [];
+//         var numberArray = [];
+//         res.data.user.completedTask.forEach(function(dataPoint) {
+//             var strDate = formatDate(new Date(dataPoint.completedDate)).toString();
+//             if(taskObj[strDate]){
+//               taskObj[strDate] += 1;
+//             }
+//             else{
+//               taskObj[strDate] = 1;
+//               baselineArray.push(10);
+//             }
+//         });
+//         console.log(taskObj);
+
+//         for(var key in taskObj) {
+//             dateArray.push(formatDate(new Date(Date.parse(key))));
+//             numberArray.push(taskObj[key]);
+//         }
+
+//         var tasks = [{
+//             label: 'Baseline',
+//             data: baselineArray,
+//             backgroundColor: [
+//                 'rgba(255,255,255, 0.4)'
+//             ]
+//         },{
+//             label: 'Tasks Completed',
+//             data: numberArray,
+//             backgroundColor: [
+//                 'rgba(0, 255, 255, 1)'
+//             ]
+//         }];
+
+//         var ctx = document.getElementById("line").getContext('2d');
+
+//         var line = new Chart(ctx, {
+//             type: 'line',
+//             data: {
+//                 labels: dateArray,
+//                 datasets: tasks
+//             }
+//         });
+
+//         //Doughnut Chart
+
+//         var ctx2 = document.getElementById("myChart").getContext('2d');
+//         var myChart = new Chart(ctx2, {
+//             type: 'doughnut',
+//             data: {
+//                 labels: ["Current", "Goal"],
+//                 datasets: [{
+//                     backgroundColor: ['rgba(0, 255, 255, 1)',
+//                         'rgba(255,255, 255, 0.4)'
+//                     ],
+//                     data: [numberArray[numberArray.length - 1], 10 - numberArray[numberArray.length - 1]]
+//                 }]
+//             }
+//         });
+//     }, function err(res) {
+//         console.log('error', res);
+//     });
 }]);
 
-function formatDate(dateToFormat) {
-    console.log('type of completed date', typeof dateToFormat);
-    var dd = dateToFormat.getDate();
-    var mm = dateToFormat.getMonth() + 1; //January is 0!
-    var yyyy = dateToFormat.getFullYear();
-    return mm + '/' + dd + '/' + yyyy;
-}
+// function formatDate(dateToFormat) {
+//     console.log('type of completed date', typeof dateToFormat);
+//     var dd = dateToFormat.getDate();
+//     var mm = dateToFormat.getMonth() + 1; //January is 0!
+//     var yyyy = dateToFormat.getFullYear();
+//     return mm + '/' + dd + '/' + yyyy;
+// }
 
