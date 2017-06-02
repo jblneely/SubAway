@@ -12,8 +12,16 @@ var UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    completedTask: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task' }],
-    currentTask: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task' }]
+    subscriptions: [{
+      title: String,
+      description: String,
+      image: String,
+      dueDate: Date,
+      price: Number,
+      useScore: Number,
+      canceledDate: Date,
+      completed: Boolean }],
+
 });
 
 UserSchema.set('toJSON', {
@@ -22,8 +30,8 @@ UserSchema.set('toJSON', {
             id: ret._id,
             email: ret.email,
             name: ret.name,
-            completedTask: ret.completedTask,
-            currentTask: ret.currentTask
+            subscriptions: ret.subscriptions
+
         };
         return returnJson;
     }

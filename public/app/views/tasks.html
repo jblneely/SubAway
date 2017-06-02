@@ -11,7 +11,7 @@
         <a ng-href="/tasks/{{task._id}}"><h3>{{task.title}}</h3></a>
         <h5>{{task.dueDate | date}}</h5>
         <a ng-click="completedTask(task._id, $index)" class="btn btn-success glyphicon glyphicon-ok pull-left"></a>
-        <a ng-click="deleteTask(task._id, $index)" class="btn btn-danger glyphicon glyphicon-remove pull-right"></a>
+
         <br>
     </div>
   </div>

@@ -25,8 +25,13 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     templateUrl: 'app/views/showTask.html',
                     controller: 'ShowCtrl'
                 })
+                .state('newUserTask', {
+                  url: '/newusertask',
+                  templateUrl: 'app/views/newUserTask.html',
+                  controller: 'NewUserCtrl'
+                })
                 .state('userTask', {
-                    url: '/usertask/',
+                    url: '/usertask/:id',
                     templateUrl: 'app/views/usertask.html',
                     controller: 'ShowAllCtrl'
                 })

@@ -15,6 +15,18 @@ router.route('/')
         Task.create(req.body, function(err, task) {
             if (err) return res.status(500).send(err);
             return res.send(task);
+        }, function(err,task){
+            if (err) return res.status(500).send(err);
+            User.findByIdAndUpdate(req.body.userId, { $push: { completedTask: req.body.id } },
+                function(err, user) {
+                    if (err) {
+                        console.log('user not updated', err);
+                    } else {
+                        console.log('user was updated', user);
+                    }
+                    return res.send({ task: task });
+                });
+
         });
     })
     .put(function(req, res) {
