@@ -23,6 +23,10 @@ h5 {
     width: 100%;
     margin: 15px auto;
 }
+.chart-container {
+  width: 80%;
+  margin: 15px auto;
+}
 .row {
     width: 100%;
     height: auto;

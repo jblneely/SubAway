@@ -1,18 +1,32 @@
+    <div class="chart-container">
+  <h2>Doughnut Chart</h2>
+  <div>
+    <canvas id="myChart"></canvas>
+  </div>
+</div>
+
+
 <div class="container">
   <div class="row">
   <div class="text-center">
     <h2> Hey
   </div>
     <hr>
+
+
+    <hr>
+
         <label for="search" class="col-xs-12"><h3>SEARCH<h3></label>
         <input type="text" class="form-control" id="search" ng-model="search">
     <a href="/newusertask" class="btn btn-success col-xs-12"><h3>ADD A SUBSCRIPTION</h3></a>
     <div class="form-group">
     </div>
+
     <div class="well col-xs-12 col-sm-6 col-md-4 col-lg-3" id="task-card" ng-repeat="user in user | filter:{title:search} track by user._id" ng-hide="{{task.completed}}">
         <a ng-href="/tasks/{{task.name}}"><h3>{{user.title}}</h3></a>
         <h5>{{user.dueDate | date}}</h5>
         <a ng-click="deleteTask(user.name, $index)" class="btn btn-danger glyphicon glyphicon-remove pull-right"></a>
+
         <br>
     </div>
   </div>
