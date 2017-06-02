@@ -25,6 +25,11 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     templateUrl: 'app/views/showTask.html',
                     controller: 'ShowCtrl'
                 })
+                .state('userTask', {
+                    url: '/usertask/',
+                    templateUrl: 'app/views/usertask.html',
+                    controller: 'ShowAllCtrl'
+                })
                 .state('signup', {
                     url: '/signup',
                     templateUrl: 'app/views/userSignup.html',
@@ -44,6 +49,7 @@ app.config(['$stateProvider', '$urlRouterProvider', '$locationProvider',
                     templateUrl: 'app/views/chart.html',
                     controller: 'LineCtrl'
                 });
+
 
             $locationProvider.html5Mode(true);
         }
