@@ -170,8 +170,60 @@ angular.module('TaskCtrls', ['TaskServices'])
     };
 }])
 
-.controller("LineCtrl", ['$scope', 'Auth', 'Task', '$http', '$stateParams', function($scope, Auth, Task, $http, $stateParams) {
+// .controller("LineCtrl", ['$scope', 'Auth', 'Task', '$http', '$stateParams', function($scope, Auth, Task, $http, $stateParams) {
 
+
+var ctx = document.getElementById("myChart").getContext('2d');
+var myChart = new Chart(ctx, {
+  type: 'doughnut',
+  data: {
+    labels: ["M", "T", "W", "T", "F", "S", "S"],
+    datasets: [{
+      backgroundColor: [
+        "#2ecc71",
+        "#3498db",
+        "#95a5a6",
+        "#9b59b6",
+        "#f1c40f",
+        "#e74c3c",
+        "#34495e"
+      ],
+      data: [12, 19, 3, 17, 28, 24, 7]
+    }]
+  }
+});
+
+// var ctx = document.getElementById("myBarChart").getContext('2d');
+// var myChart = new Chart(ctx, {
+//   type: 'bar',
+//   data: {
+//     labels: ["M", "T", "W", "R", "F", "S", "S"],
+//     datasets: [{
+//       label: 'apples',
+//       data: [12, 19, 3, 17, 28, 24, 7]
+//     }, {
+//       label: 'oranges',
+//       data: [30, 29, 5, 5, 20, 3, 10]
+//     }]
+//   }
+// });
+
+// var ctx = document.getElementById('myChart').getContext('2d');
+// var myChart = new Chart(ctx, {
+//   type: 'line',
+//   data: {
+//     labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+//     datasets: [{
+//       label: 'apples',
+//       data: [12, 19, 3, 17, 6, 3, 7],
+//       backgroundColor: "rgba(153,255,51,0.6)"
+//     }, {
+//       label: 'oranges',
+//       data: [2, 29, 5, 5, 2, 3, 10],
+//       backgroundColor: "rgba(255,153,0,0.6)"
+//     }]
+//   }
+// });
 
 
 
@@ -253,7 +305,7 @@ angular.module('TaskCtrls', ['TaskServices'])
 //     }, function err(res) {
 //         console.log('error', res);
 //     });
-}]);
+// }]);
 
 // function formatDate(dateToFormat) {
 //     console.log('type of completed date', typeof dateToFormat);
