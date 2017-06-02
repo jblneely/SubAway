@@ -6,6 +6,7 @@ var TaskSchema = mongoose.Schema({
     description: String,
     image: String,
     dueDate: Date,
+    cost: Number,
     completedDate: Date,
     completed: Boolean
 });

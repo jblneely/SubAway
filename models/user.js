@@ -12,8 +12,9 @@ var UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    completedTask: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task' }],
-    currentTask: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task' }]
+    completedTask: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Task',
+
+     }],
 });
 
 UserSchema.set('toJSON', {
