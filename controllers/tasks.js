@@ -69,6 +69,7 @@ router.route('/:id')
 
 router.get('/usertasks/:id', function(req, res) {
     console.log('in /usertasks/:id', 'ID is', req.params.id);
+    console.log(res);
     User.findOne({ _id: req.params.id })
         .populate('completedTask')
         .exec(function(err, user) {

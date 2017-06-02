@@ -45,7 +45,7 @@ angular.module('TaskCtrls', ['TaskServices'])
 
         $http.get('/api/users/' + user.id).then(function success(data) {
             console.log('data', data.data.subscriptions);
-            $scope.tasks = data.data.subscriptions;
+            $scope.user = data.data.subscriptions;
         }, function error(data) {
             console.log(data);
         });

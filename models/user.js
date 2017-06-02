@@ -12,6 +12,9 @@ var UserSchema = mongoose.Schema({
         type: String,
         required: true
     },
+
+
+
     subscriptions: [{
       title: String,
       description: String,
@@ -21,6 +24,7 @@ var UserSchema = mongoose.Schema({
       useScore: Number,
       canceledDate: Date,
       completed: Boolean }],
+
 
 });
 
