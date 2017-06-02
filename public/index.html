@@ -29,7 +29,39 @@
 <body>
 
     <div class="container">
-        <div ng-include="'app/views/navbar.html'"></div>
+       <nav class="navbar navbar-default" role="navigation" ng-controller="NavCtrl">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+       <img src="img/logo_1.png" alt="">
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
+
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href=" /signup " ng-hide="isLoggedIn() ">SIGNUP</a></li>
+            <li><a href="/login " ng-hide="isLoggedIn() ">LOGIN</a></li>
+            <li><a href="/chart/{{user.id}}" ng-show="isLoggedIn()">CHART</a></li>
+             <li><a href="/usertask/{{user.id}}" ng-show="isLoggedIn()">PROFILE</a></li>
+
+            <li><a ng-click="logout() " ng-show="isLoggedIn() ">LOGOUT</a></li>
+        </ul>
+    </div>
+    <!-- /.navbar-collapse -->
+</nav>
+  <div class='row'>
+    <div class="col-lg-4">
+      <img src="" alt="">
+    </div>
+    <div class="col-lg-4">
+      <img src="" alt="">
+    </div>
+  </div>
         <div ng-controller="AlertsController">
             <div ng-repeat="a in alerts()">
                 <div class="alert alert-danger" ng-if="a.type == 'error'">
@@ -40,8 +72,10 @@
                 </div>
             </div>
         </div>
-        <div ui-view></div>
+    <div class='background-img'>
+        <div class="z-index" ui-view></div>
     </div>
+</div>
 </body>
 
 </html>
