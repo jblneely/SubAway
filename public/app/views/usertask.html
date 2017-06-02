@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="row">
+    <h1>Profile</h1>
+    <hr>
+        <label for="search" class="col-xs-12"><h3>SEARCH<h3></label>
+        <input type="text" class="form-control" id="search" ng-model="search">
+    <a href="/newusertask" class="btn btn-success col-xs-12"><h3>ADD A SUBSCRIPTION</h3></a>
+    <div class="form-group">
+    </div>
+    <div class="well col-xs-12 col-sm-6 col-md-4 col-lg-3" id="task-card" ng-repeat="task in data.subscriptions | filter:{title:search} track by task._id" ng-hide="{{task.completed}}">
+        <a ng-href="/tasks/{{task.name}}"><h3>{{task.title}}</h3></a>
+        <h5>{{task.dueDate | date}}</h5>
+        <a ng-click="deleteTask(task.name, $index)" class="btn btn-danger glyphicon glyphicon-remove pull-right"></a>
+        <br>
+    </div>
+  </div>
+</div>

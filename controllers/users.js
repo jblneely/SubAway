@@ -23,12 +23,29 @@ router.route('/')
         });
     });
 
+  router.post('/newusertask', function(req, res) {
+    console.log('reached newusertask route');
+    console.log(req.body);
+    User.findByIdAndUpdate(req.body.userId, { $push: { subscriptions: {title: req.body.title, image: req.body.image, dueDate: req.body.dueDate, price: req.body.price, useScore: req.body.price, canceledDate: req.body.canceledDate, completed: false
+ }}
+},
+      function(err, result) {
+        if(err) {
+          return res.send('error!', err);
+        }
+        res.send('success');
+      });
+  });
+
 router.get('/:id', function(req, res) {
+  console.log('sldfjdgukzjgdfj', req.params.id);
     User.findById(req.params.id, function(err, user) {
+        console.log('sucess', err, user);
         if (err) return res.status(500).send(err);
 
         return res.send(user);
     });
 });
+
 
 module.exports = router;

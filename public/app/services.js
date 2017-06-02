@@ -4,6 +4,9 @@ angular.module('TaskServices', ['ngResource'])
             'put': { method: 'PUT' }
         });
     }])
+    .factory('User', ['$resource', function($resource){
+      return $resource('/api/users/:id');
+    }])
     .factory('Auth', ['$window', function($window) {
         return {
             saveToken: function(token) {
@@ -25,7 +28,7 @@ angular.module('TaskServices', ['ngResource'])
                     try {
                         //Try executing some vulnerable code that could potentially throw an exception
                         var payload = JSON.parse($window.atob(token.split('.')[1]));
-                        console.log('payload fetched and decoded:', payload);
+                        //console.log('payload fetched and decoded:', payload);
                         return payload;
                     } catch (err) {
                         //Gracefully handle the error

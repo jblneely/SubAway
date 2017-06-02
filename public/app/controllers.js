@@ -19,6 +19,7 @@ angular.module('TaskCtrls', ['TaskServices'])
 
     }])
     .controller('ShowCtrl', ['$scope', '$stateParams', 'Task', function($scope, $stateParams, Task) {
+        console.log('show controller');
         $scope.task = {};
 
         Task.get({ id: $stateParams.id }, function success(data) {
@@ -35,27 +36,32 @@ angular.module('TaskCtrls', ['TaskServices'])
         };
 
     }])
-    .controller('ShowAllCtrl', ['$scope', 'Task', '$location', 'Auth', function($scope, Task, $location, Auth) {
+    .controller('ShowAllCtrl', ['$scope', 'Task', '$location', 'Auth', '$http', function($scope, Task, $location, Auth, $http) {
+        console.log('showall controller');
         $scope.tasks = [];
         var user = Auth.currentUser();
+        console.log(user.id);
 
-        Task.query(function success(data) {
-            $scope.tasks = data;
+        $http.get('/api/users/' + user.id).then(function success(data) {
+            console.log('data', data.data.subscriptions);
+            $scope.tasks = data.data.subscriptions;
         }, function error(data) {
             console.log(data);
         });
 
-        $scope.completedTask = function(id, tasksIdx) {
+
+        //CREATE
+        $scope.completedTask = function(name, tasksIdx) {
             console.log('checking completed on task db');
-            Task.put({ id: id, userId: user.id }, function(task) {
+            Task.put({ id: user.id, taskName: name }, function(task) {
                 // console.log('line 51 controllers, completed task');
-                $location.path('/chart/' + user.id);
+                $location.path('/tasks/new');
             }, function error(data) {
                 console.log("error", data);
             });
         };
 
-        $scope.deleteTask = function(id, tasksIdx) {
+        $scope.deleteTask = function(name, tasksIdx) {
             Task.delete({ id: id }, function success(data) {
                 $scope.tasks.splice(tasksIdx, 1);
             }, function error(data) {
@@ -64,9 +70,9 @@ angular.module('TaskCtrls', ['TaskServices'])
         };
     }])
     .controller('NewCtrl', ['$scope', '$location', 'Task', function($scope, $location, Task) {
+        console.log('new controller');
         $scope.task = {
             title: '',
-            description: '',
             image: ''
         };
 
@@ -76,6 +82,34 @@ angular.module('TaskCtrls', ['TaskServices'])
             }, function error(data) {
                 console.log(data);
             });
+        };
+    }])
+    .controller('NewUserCtrl', ['$scope', '$location', 'User', '$http', 'Auth', function($scope, $location, User, $http, Auth) {
+        console.log('new user controller');
+
+        $scope.user = {
+            title: '',
+            description: '',
+            image: ''
+        };
+
+        $scope.createUserTask = function() {
+            $http.post('/api/users/newusertask', {
+              userId: Auth.currentUser().id,
+              title: $scope.user.subscription.title,
+              description: $scope.user.subscription.description,
+              dueDate: $scope.user.subscription.dueDate,
+              image: $scope.user.subscription.image,
+              price: $scope.user.subscription.price,
+              useScore: $scope.user.subscription.useScore,
+              canceledDate: $scope.user.subscription.canceledDate,
+              completed: $scope.user.subscription.completed
+            }).then(function success(data) {
+                console.log('success', data);
+            }, function error(data) {
+                console.log('fail', data);
+            });
+            $location.path('/usertask/');
         };
     }])
     .controller('NavCtrl', ['$scope', 'Auth', '$location', function($scope, Auth, $location) {

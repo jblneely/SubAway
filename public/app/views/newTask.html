@@ -1,16 +1,16 @@
-<h1>New Task</h1>
+<h1>New Subscription</h1>
 <div class="container task">
 <form ng-submit="createTask()">
     <div class="form-group">
-        <label for="title">Title</label>
+        <label for="title">Subscription Service Name</label>
         <input type="text" class="form-control" id="title" ng-model="task.title">
     </div>
     <div class="form-group">
-        <label for="description">Description</label>
+        <label for="description">Cost</label>
         <textarea class="form-control" id="description" ng-model="task.description"></textarea>
     </div>
     <div class="form-group">
-        <label for="dueDate">Due Date</label>
+        <label for="dueDate">Renewal Date</label>
         <input type="date" class="form-control" id="dueDate" placeholder="" ng-model="task.dueDate">
     </div>
     <div class="form-group">
