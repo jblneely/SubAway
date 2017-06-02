@@ -1,4 +1,4 @@
-# Taskminder App
+# SubAway App
 
 Taskminder uses graphs to compare your daily achievement against a baseline goal.  The Taskboard displays tasks available to all users.  When a user marks a task as completed that task is removed from the taskboard and linked to the user.  Then the user's graph increments to reflect the user's completion of the task.
 
